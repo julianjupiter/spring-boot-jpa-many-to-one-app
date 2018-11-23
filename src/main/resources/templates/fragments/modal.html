@@ -1,0 +1,50 @@
+<!-- Modal -->
+<div class="modal fade" id="appModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true" th:fragment="modal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalLabel">View Book</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <th class="text-right border-0" scope="row">ID</th>
+                            <td class="border-0" id="id"></td>
+                        </tr>
+                        <tr>
+                            <th class="text-right border-0" scope="row">Title</th>
+                            <td class="border-0" id="title"></td>
+                        </tr>
+                        <tr>
+                            <th class="text-right border-0" scope="row">Edition</th>
+                            <td class="border-0" id="edition"></td>
+                        </tr>
+                        <tr>
+                            <th class="text-right border-0" scope="row">Author</th>
+                            <td class="border-0" id="author"></td>
+                        </tr>
+                        <tr>
+                            <th class="text-right border-0" scope="row">Year Published</th>
+                            <td class="border-0" id="yearPublished"></td>
+                        </tr>
+                        <tr>
+                            <th class="text-right border-0" scope="row">Description</th>
+                            <td class="border-0" id="description"></td>
+                        </tr>
+                        <tr>
+                            <th class="text-right border-0" scope="row">Category</th>
+                            <td class="border-0" id="category"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
