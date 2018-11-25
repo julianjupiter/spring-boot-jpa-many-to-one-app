@@ -1,30 +1,17 @@
-package io.github.julianjupiter.springbootjpamanytoone.domain;
+package io.github.julianjupiter.springbootjpamanytoone.form;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
-import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.time.Year;
 
-@Entity
-public class Book {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class BookForm {
     private long id;
-    @NotBlank(message = "Title is required.")
-    @NotNull
     private String title;
     private String edition;
     private String author;
     private String description;
-    private LocalDateTime createdAt;
-    @ManyToOne
-    @JoinColumn(name = "category_id")
-    @JsonManagedReference
-    private Category category;
+    private int categoryId;
 
     public long getId() {
         return id;
@@ -66,19 +53,11 @@ public class Book {
         this.description = description;
     }
 
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
+    public int getCategoryId() {
+        return categoryId;
     }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
     }
 }

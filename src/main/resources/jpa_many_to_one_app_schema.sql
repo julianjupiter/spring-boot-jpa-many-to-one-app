@@ -11,7 +11,6 @@ CREATE TABLE IF NOT EXISTS book (
     title VARCHAR(255) NOT NULL UNIQUE,
     edition VARCHAR(255) NULL,
     author VARCHAR(255) NULL,
-    year_published YEAR(4) NULL,
     description TEXT NULL,
     category_id INT(11) NOT NULL,
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
