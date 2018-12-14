@@ -8,12 +8,17 @@
         <main class="container">
             <div class="row">
                 <div class="col-8 offset-2">
-                    <form id="bookForm" action="/books/create" method="post" th:object="${book}">
+                    <form id="bookForm" th:action="@{/books/edit/{id}(id=${book.id})}" method="post" th:object="${book}">
                         <div class="card">
                             <div class="card-header bg-dark text-center text-white">
-                                New Book
+                                Edit Book
                             </div>
                             <div class="card-body">
+                                <div class="form-group">
+                                    <label for="id">ID</label>
+                                    <input type="text" class="form-control" id="id" name="title" th:field="*{id}" th:classappend="${#fields.hasErrors('id') ? 'is-invalid' : ''}" placeholder="id" disabled>
+                                    <div class="invalid-feedback" th:if="${#fields.hasErrors('id')}" th:errors="*{id}"></div>
+                                </div>
                                 <div class="form-group">
                                     <label for="title">Title</label>
                                     <input type="text" class="form-control" id="title" name="title" th:field="*{title}" th:classappend="${#fields.hasErrors('title') ? 'is-invalid' : ''}" placeholder="Title">
@@ -34,7 +39,7 @@
                                 <div class="form-group">
                                     <label for="category">Category</label>
                                     <select class="form-control" id="category" th:field="*{category.id}">
-                                        <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}">Category</option>
+                                        <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}" th:selected="${category.id == book.category.id}">Category</option>
                                     </select>
                                 </div>
                             </div>

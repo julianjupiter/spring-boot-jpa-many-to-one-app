@@ -22,7 +22,6 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @NotBlank(message = "Category name is required.")
-    @NotNull
     private String name;
     private String description;
     private LocalDateTime createdAt;

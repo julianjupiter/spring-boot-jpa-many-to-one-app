@@ -18,6 +18,11 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    public Iterable<Book> findByCategoryName(String category) {
+        return bookRepository.findByCategoryName(category);
+    }
+
+    @Override
     public Optional<Book> findById(long id) {
         return bookRepository.findById(id);
     }

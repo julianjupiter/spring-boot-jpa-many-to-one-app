@@ -15,7 +15,6 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @NotBlank(message = "Title is required.")
-    @NotNull
     private String title;
     private String edition;
     private String author;

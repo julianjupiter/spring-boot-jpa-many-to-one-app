@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <th:block th:include="fragments/header :: head"></th:block>
+    </head>
+    <body>
+        <header th:replace="fragments/header :: header"></header>
+        <main class="container">
+            <div class="row">
+                <div class="col-8 offset-2 mx-auto">
+                    <div class="card">
+                        <div class="card-header bg-dark text-center text-white">
+                            View Book
+                        </div>
+                        <div class="card-body">
+                            <table class="table">
+                                <tbody>
+                                <tr>
+                                    <th class="text-right border-0" scope="row">ID</th>
+                                    <td class="border-0" id="id" th:text="${book.id}"></td>
+                                </tr>
+                                <tr>
+                                    <th class="text-right border-0" scope="row">Title</th>
+                                    <td class="border-0" id="title" th:text="${book.title}"></td>
+                                </tr>
+                                <tr>
+                                    <th class="text-right border-0" scope="row">Edition</th>
+                                    <td class="border-0" id="edition" th:text="${book.edition}"></td>
+                                </tr>
+                                <tr>
+                                    <th class="text-right border-0" scope="row">Author</th>
+                                    <td class="border-0" id="author" th:text="${book.author}"></td>
+                                </tr>
+                                <tr>
+                                    <th class="text-right border-0" scope="row">Description</th>
+                                    <td class="border-0" id="description" th:text="${book.description}"></td>
+                                </tr>
+                                <tr>
+                                    <th class="text-right border-0" scope="row">Category</th>
+                                    <td class="border-0" id="category" th:text="${book.category.name}"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="card-footer text-muted text-right">
+                            <a href="/books" class="btn btn-secondary btn-sm"><i class="fas fa-chevron-circle-left"></i></a>
+                            <a th:href="@{/books/edit/{id}(id=${book.id})}">
+                                <button type="submit" class="btn btn-primary btn-sm"><i class="far fa-edit"></i></button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer th:replace="fragments/footer :: footer"></footer>
+        <div th:replace="fragments/footer :: script"></div>
+    </body>
+</html>

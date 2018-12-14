@@ -38,8 +38,8 @@
                                     <td th:text="${book.category.name}"></td>
                                     <td class="text-center">
                                         <div class="btn-group" role="group" aria-label="Action Buttons">
-                                            <button class="btn btn-info btn-sm" th:attr="data-id=${book.id}" data-toggle="modal" data-target="#viewBookModal"><i class="far fa-eye"></i></button>
-                                            <button class="btn btn-success btn-sm" th:attr="data-id=${book.id}" data-toggle="modal" data-target="#updateBookModal"><i class="far fa-edit"></i></button>
+                                            <a th:href="@{/books/view/{id}(id=${book.id})}" class="btn btn-info btn-sm"><i class="far fa-eye"></i></a>
+                                            <a th:href="@{/books/edit/{id}(id=${book.id})}" class="btn btn-success btn-sm"><i class="far fa-edit"></i></a>
                                         </div>
                                     </td>
                                 </tr>
@@ -49,9 +49,6 @@
                 </div>
             </div>
         </main>
-        <div th:replace="fragments/modal :: defaultModal"></div>
-        <div th:replace="fragments/modal :: viewBookModal"></div>
-        <div th:replace="fragments/modal :: updateBookModal"></div>
         <footer th:replace="fragments/footer :: footer"></footer>
         <div th:replace="fragments/footer :: script"></div>
     </body>
