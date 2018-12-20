@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <th:block th:include="fragments/header :: head(page=#{page.categories}, action=#{action.edit})"></th:block>
+    </head>
+    <body>
+        <header th:replace="fragments/header :: header(#{page.categories})"></header>
+        <main class="container">
+            <div class="row">
+                <div class="col-8 offset-2">
+                    <form id="categoryForm" th:action="@{/categories/edit/{id}(id=${category.id})}" method="post" th:object="${category}">
+                        <div class="card">
+                            <div class="card-header bg-dark text-center text-white" th:text="#{action.edit} + ' ' + #{page.categories}">Edit Category</div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="id" th:text="#{category.id}">ID</label>
+                                    <input type="text" class="form-control" id="id" name="title" th:field="*{id}" th:classappend="${#fields.hasErrors('id') ? 'is-invalid' : ''}" placeholder="id" disabled>
+                                    <div class="invalid-feedback" th:if="${#fields.hasErrors('id')}" th:errors="*{id}"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="name" th:text="#{category.name}">Name</label>
+                                    <input type="text" class="form-control" id="name" name="name" th:field="*{name}" th:classappend="${#fields.hasErrors('name') ? 'is-invalid' : ''}" placeholder="Name">
+                                    <div class="invalid-feedback" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="description" th:text="#{category.description}">Description</label>
+                                    <textarea class="form-control" id="description" th:field="*{description}" rows="2"></textarea>
+                                </div>
+                            </div>
+                            <div class="card-footer text-muted text-right">
+                                <a href="/categories" class="btn btn-secondary btn-sm"><i class="fas fa-chevron-circle-left"></i></a>
+                                <button type="reset" class="btn btn-secondary btn-sm"><i class="fas fa-undo"></i></button>
+                                <button type="submit" class="btn btn-primary btn-sm"><i class="far fa-save"></i></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+        <footer th:replace="fragments/footer :: footer"></footer>
+        <div th:replace="fragments/footer :: script"></div>
+    </body>
+</html>

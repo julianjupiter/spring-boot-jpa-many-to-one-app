@@ -1,38 +1,36 @@
 <!doctype html>
 <html lang="en">
     <head>
-        <th:block th:include="fragments/header :: head"></th:block>
+        <th:block th:include="fragments/header :: head(page=#{page.books}, action=#{action.create})"></th:block>
     </head>
     <body>
-        <header th:replace="fragments/header :: header"></header>
+        <header th:replace="fragments/header :: header(#{page.books})"></header>
         <main class="container">
             <div class="row">
                 <div class="col-8 offset-2">
                     <form id="bookForm" action="/books/create" method="post" th:object="${book}">
                         <div class="card">
-                            <div class="card-header bg-dark text-center text-white">
-                                New Book
-                            </div>
+                            <div class="card-header bg-dark text-center text-white" th:text="#{action.create} + ' ' + #{page.books}">Create Book</div>
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="title">Title</label>
+                                    <label for="title" th:text="#{book.title}">Title</label>
                                     <input type="text" class="form-control" id="title" name="title" th:field="*{title}" th:classappend="${#fields.hasErrors('title') ? 'is-invalid' : ''}" placeholder="Title">
                                     <div class="invalid-feedback" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="edition">Edition</label>
+                                    <label for="edition" th:text="#{book.edition}">Edition</label>
                                     <input type="text" class="form-control" id="edition" th:field="*{edition}" placeholder="Edition">
                                 </div>
                                 <div class="form-group">
-                                    <label for="author">Author</label>
+                                    <label for="author" th:text="#{book.author}">Author</label>
                                     <input type="text" class="form-control" id="author" th:field="*{author}" placeholder="Author">
                                 </div>
                                 <div class="form-group">
-                                    <label for="description">Description</label>
+                                    <label for="description" th:text="#{book.description}">Description</label>
                                     <textarea class="form-control" id="description" th:field="*{description}" rows="2"></textarea>
                                 </div>
                                 <div class="form-group">
-                                    <label for="category">Category</label>
+                                    <label for="category" th:text="#{book.category}">Category</label>
                                     <select class="form-control" id="category" th:field="*{category.id}">
                                         <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}">Category</option>
                                     </select>
@@ -48,7 +46,6 @@
                 </div>
             </div>
         </main>
-        <!--<div th:replace="fragments/modal :: modal"></div>-->
         <footer th:replace="fragments/footer :: footer"></footer>
         <div th:replace="fragments/footer :: script"></div>
     </body>

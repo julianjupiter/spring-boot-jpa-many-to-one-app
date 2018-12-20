@@ -26,16 +26,12 @@ body > .container {
   padding-left: 15px;
 }
 
-code {
-  font-size: 80%;
-}
-
 .bg-orange {
     background-color: #FF9800;
 }
 
 #bookTable thead th,
- #categoryTable thead th{
+#categoryTable thead th{
     color: #fff;
     border-bottom: solid 2px #FF9800;
 }

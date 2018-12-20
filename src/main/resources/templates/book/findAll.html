@@ -1,10 +1,10 @@
 <!doctype html>
 <html lang="en">
     <head>
-        <th:block th:include="fragments/header :: head"></th:block>
+        <th:block th:include="fragments/header :: head(page=#{page.books}, action=#{action.list})"></th:block>
     </head>
     <body>
-        <header th:replace="fragments/header :: header"></header>
+        <header th:replace="fragments/header :: header(page=#{page.books})"></header>
         <main class="container">
             <div class="row">
                 <div class="col">
@@ -16,16 +16,16 @@
                             </button>
                         </div>
                     </th:block>
-                    <a href="/books/create" class="btn btn-primary"><i class="far fa-plus-square"></i> New</a>
+                    <a href="/books/create" class="btn btn-primary"><i class="far fa-plus-square"></i></a>
                     <table id="bookTable" class="table" style="margin-top:10px;">
                         <thead>
                             <tr>
-                                <th class="bg-dark">ID</th>
-                                <th class="bg-dark">Title</th>
-                                <th class="bg-dark">Edition</th>
-                                <th class="bg-dark">Author</th>
-                                <th class="bg-dark">Category</th>
-                                <th class="bg-dark">Action</th>
+                                <th class="bg-dark" th:text="#{book.id}">ID</th>
+                                <th class="bg-dark" th:text="#{book.title}">Title</th>
+                                <th class="bg-dark" th:text="#{book.edition}">Edition</th>
+                                <th class="bg-dark" th:text="#{book.author}">Author</th>
+                                <th class="bg-dark" th:text="#{book.category}">Category</th>
+                                <th class="bg-dark" th:text="#{book.action}">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -40,6 +40,7 @@
                                         <div class="btn-group" role="group" aria-label="Action Buttons">
                                             <a th:href="@{/books/view/{id}(id=${book.id})}" class="btn btn-info btn-sm"><i class="far fa-eye"></i></a>
                                             <a th:href="@{/books/edit/{id}(id=${book.id})}" class="btn btn-success btn-sm"><i class="far fa-edit"></i></a>
+                                            <a th:href="@{/books/delete/{id}(id=${book.id})}" class="btn btn-danger btn-sm"><i class="far fa-trash-alt"></i></a>
                                         </div>
                                     </td>
                                 </tr>

@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <th:block th:include="fragments/header :: head(page=#{page.error.404}, action=null)"></th:block>
+    </head>
+    <body>
+        <header th:replace="fragments/header :: header(#{page.error})"></header>
+        <main role="main" class="container">
+            <h1 class="mt-5" th:text="#{page.error.404} + ', ' + #{error.404}">Error 404, page not found.</h1>
+            <a href="/" th:title="#{page.home}" class="btn btn-primary"><i class="fas fa-home"></i> <span th:text="#{back.to.home}">Back to Home</span></a>
+        </main>
+        <footer th:replace="fragments/footer :: footer"></footer>
+        <div th:replace="fragments/footer :: script"></div>
+    </body>
+</html>

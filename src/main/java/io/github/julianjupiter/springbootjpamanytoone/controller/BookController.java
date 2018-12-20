@@ -1,30 +1,26 @@
 package io.github.julianjupiter.springbootjpamanytoone.controller;
 
 import io.github.julianjupiter.springbootjpamanytoone.domain.Book;
-import io.github.julianjupiter.springbootjpamanytoone.domain.Category;
 import io.github.julianjupiter.springbootjpamanytoone.exception.ResourceNotFoundException;
-import io.github.julianjupiter.springbootjpamanytoone.form.BookForm;
 import io.github.julianjupiter.springbootjpamanytoone.service.BookService;
 import io.github.julianjupiter.springbootjpamanytoone.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
-import java.util.Optional;
 
 @Controller
 @RequestMapping("/books")
-public class BookController extends BaseController {
-    @Value("${page.books}")
-    private String pageName;
-
+public class BookController {
     @Autowired
     private BookService bookService;
     @Autowired
@@ -33,13 +29,10 @@ public class BookController extends BaseController {
     @ModelAttribute
     public void commonAttributes(Model model) {
         model.addAttribute("categories", categoryService.findAll());
-        model.addAttribute("pageName", pageName);
     }
 
     @GetMapping
     public String findAll(Model model, @ModelAttribute("message") String message, @RequestParam(value = "category", required = false) String category) {
-        model.addAttribute("pageNameSuffix", "View All");
-
         if (category != null && !category.isEmpty()) {
             model.addAttribute("books", bookService.findByCategoryName(category));
         } else {
@@ -53,7 +46,6 @@ public class BookController extends BaseController {
     public String findById(@PathVariable long id, Model model) throws ResourceNotFoundException {
         return bookService.findById(id)
                 .map(book -> {
-                    model.addAttribute("pageNameSuffix", "View");
                     model.addAttribute("book", book);
                     return "book/view";
                 })
@@ -62,16 +54,12 @@ public class BookController extends BaseController {
 
     @GetMapping("/create")
     public String create(Book book, Model model) {
-        model.addAttribute("pageNameSuffix", "Create");
-
         return "book/create";
     }
 
     @PostMapping("/create")
     public String create(@Valid Book book, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
-            model.addAttribute("pageNameSuffix", "Create");
-
             return "book/create";
         }
 
@@ -86,7 +74,6 @@ public class BookController extends BaseController {
     public String edit(@PathVariable long id, Model model) throws ResourceNotFoundException {
         return bookService.findById(id)
                 .map(book -> {
-                    model.addAttribute("pageNameSuffix", "Edit");
                     model.addAttribute("book", book);
                     return "book/edit";
                 })
@@ -97,8 +84,6 @@ public class BookController extends BaseController {
     @PostMapping("/edit/{id}")
     public String update(@PathVariable long id, @Valid Book book, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) throws ResourceNotFoundException {
         if (bindingResult.hasErrors()) {
-            model.addAttribute("pageNameSuffix", "Edit");
-
             return "book/edit";
         }
 
@@ -109,5 +94,23 @@ public class BookController extends BaseController {
                     return "redirect:/books";
                 })
                 .orElseThrow(() -> new ResourceNotFoundException());
+    }
+
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable long id, Model model) throws ResourceNotFoundException {
+        return bookService.findById(id)
+                .map(book -> {
+                    model.addAttribute("book", book);
+                    return "book/delete";
+                })
+                .orElseThrow(() -> new ResourceNotFoundException());
+    }
+
+
+    @PostMapping("/delete/{id}")
+    public String delete(@PathVariable long id, RedirectAttributes redirectAttributes) {
+        bookService.delete(id);
+        redirectAttributes.addFlashAttribute("message", "Book with ID " + id + " has been deleted!");
+        return "redirect:/books";
     }
 }

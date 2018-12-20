@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <th:block th:include="fragments/header :: head(page=#{page.categories}, action=#{action.view})"></th:block>
+    </head>
+    <body>
+        <header th:replace="fragments/header :: header(#{page.categories})"></header>
+        <main class="container">
+            <div class="row">
+                <div class="col-8 offset-2 mx-auto">
+                    <div class="card">
+                        <div class="card-header bg-dark text-center text-white" th:text="#{action.view} + ' ' + #{page.categories}">View Category</div>
+                        <div class="card-body">
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <th class="text-right border-0" scope="row" th:text="#{category.id}">ID</th>
+                                        <td class="border-0" id="id" th:text="${category.id}"></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-right border-0" scope="row" th:text="#{category.name}">Name</th>
+                                        <td class="border-0" id="title" th:text="${category.name}"></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-right border-0" scope="row" th:text="#{category.description}">Description</th>
+                                        <td class="border-0" id="description" th:text="${category.description}"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="card-footer text-muted text-right">
+                            <a href="/categories" class="btn btn-secondary btn-sm"><i class="fas fa-chevron-circle-left"></i></a>
+                            <a th:href="@{/categories/edit/{id}(id=${category.id})}">
+                                <button type="submit" class="btn btn-primary btn-sm"><i class="far fa-edit"></i></button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer th:replace="fragments/footer :: footer"></footer>
+        <div th:replace="fragments/footer :: script"></div>
+    </body>
+</html>

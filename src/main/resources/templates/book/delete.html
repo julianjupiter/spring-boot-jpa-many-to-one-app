@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
     <head>
-        <th:block th:include="fragments/header :: head(page=#{page.books}, action=#{action.view})"></th:block>
+        <th:block th:include="fragments/header :: head(page=#{page.books}, action=#{action.delete})"></th:block>
     </head>
     <body>
         <header th:replace="fragments/header :: header(#{page.books})"></header>
@@ -9,42 +9,44 @@
             <div class="row">
                 <div class="col-8 offset-2 mx-auto">
                     <div class="card">
-                        <div class="card-header bg-dark text-center text-white" th:text="#{action.view} + ' ' + #{page.books}">View Book</div>
+                        <div class="card-header bg-dark text-center text-white" th:text="#{action.delete} + ' ' + #{page.books}">Delete Book</div>
                         <div class="card-body">
                             <table class="table">
                                 <tbody>
                                 <tr>
-                                    <th class="text-right border-0" scope="row" th:text="#{book.id}">ID</th>
+                                    <th class="text-right border-0" scope="row">ID</th>
                                     <td class="border-0" id="id" th:text="${book.id}"></td>
                                 </tr>
                                 <tr>
-                                    <th class="text-right border-0" scope="row" th:text="#{book.title}">Title</th>
+                                    <th class="text-right border-0" scope="row">Title</th>
                                     <td class="border-0" id="title" th:text="${book.title}"></td>
                                 </tr>
                                 <tr>
-                                    <th class="text-right border-0" scope="row" th:text="#{book.edition}">Edition</th>
+                                    <th class="text-right border-0" scope="row">Edition</th>
                                     <td class="border-0" id="edition" th:text="${book.edition}"></td>
                                 </tr>
                                 <tr>
-                                    <th class="text-right border-0" scope="row" th:text="#{book.author}">Author</th>
+                                    <th class="text-right border-0" scope="row">Author</th>
                                     <td class="border-0" id="author" th:text="${book.author}"></td>
                                 </tr>
                                 <tr>
-                                    <th class="text-right border-0" scope="row" th:text="#{book.description}">Description</th>
+                                    <th class="text-right border-0" scope="row">Description</th>
                                     <td class="border-0" id="description" th:text="${book.description}"></td>
                                 </tr>
                                 <tr>
-                                    <th class="text-right border-0" scope="row" th:text="#{book.category}">Category</th>
+                                    <th class="text-right border-0" scope="row">Category</th>
                                     <td class="border-0" id="category" th:text="${book.category.name}"></td>
                                 </tr>
                                 </tbody>
                             </table>
                         </div>
                         <div class="card-footer text-muted text-right">
-                            <a href="/books" class="btn btn-secondary btn-sm"><i class="fas fa-chevron-circle-left"></i></a>
-                            <a th:href="@{/books/edit/{id}(id=${book.id})}">
-                                <button type="submit" class="btn btn-primary btn-sm"><i class="far fa-edit"></i></button>
-                            </a>
+                            <div class="form-row float-right">
+                                <a href="/books" class="btn btn-secondary btn-sm mr-1"><i class="fas fa-chevron-circle-left"></i></a>
+                                <form th:action="@{/books/delete/{id}(id=${book.id})}" method="post">
+                                    <button type="submit" class="btn btn-danger btn-sm"><i class="far fa-trash-alt"></i></button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
